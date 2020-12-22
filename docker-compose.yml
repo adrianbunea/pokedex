@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  pokemon-client:
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    container_name: node-container
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      # excludes node_modules from the first volume, this is because when we start the container and the volumes are
+      # synced the Docker daemon looks inside the host source and copies it to the container destination, at build time
+      # the node_modules are created and when the container is ran it is overwritten with the host node_modules
+    tty: true
+    ports:
+      - 3000:3000
+    working_dir: /app
+    command: npm start
