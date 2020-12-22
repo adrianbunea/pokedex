@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useEffect, useState } from 'react';
+import CacheContext from './index';
 
 function App() {
+  const cache = useContext(CacheContext);
+  const [ pokemons, setPokemons ] = useState(undefined);
+
+  useEffect(async () => {
+    getPokemon(cache).then((pokemons) => {
+      setPokemons(pokemons);
+    });
+  }, []);
+
+  const pokemonList = pokemons?.results.map((pokemon) => {
+    return (
+      <li>{pokemon.name}</li>
+    )
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ul>
+      {pokemonList}
+    </ul>
   );
+}
+
+async function getPokemon(cache) {
+  const endpointUrl = 'https://pokeapi.co/api/v2/pokemon/';
+  await cache.add(endpointUrl);
+  const pokemonResponse = await cache.match(endpointUrl);
+  return pokemonResponse.json();
 }
 
 export default App;
