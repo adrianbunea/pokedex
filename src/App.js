@@ -1,32 +1,27 @@
-import { useContext, useEffect, useState } from 'react';
-import CacheContext from './index';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+import Home from './pages/Home';
+import Pokemon from './pages/Pokemon';
+import PokemonDetails from './pages/PokemonDetails';
 
 function App() {
-  const cache = useContext(CacheContext);
-  const [ pokemons, setPokemons ] = useState(undefined);
-
-  useEffect(() => {
-    async function getPokemon(cache) {
-      const endpointUrl = 'https://pokeapi.co/api/v2/pokemon/';
-      await cache.add(endpointUrl);
-      const pokemonResponse = await cache.match(endpointUrl);
-      const pokemons = await pokemonResponse.json();
-      setPokemons(pokemons);
-    }
-
-    getPokemon(cache);
-  }, []);
-
-  const pokemonList = pokemons?.results.map((pokemon) => {
-    return (
-      <li key={pokemon.url}>{pokemon.name}</li>
-    )
-  });
-
   return (
-    <ul>
-      {pokemonList}
-    </ul>
+    <Router>
+      <Switch>
+        <Route path="/pokemon/:id/">
+          <PokemonDetails />
+        </Route>
+        <Route path="/pokemon">
+          <Pokemon />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
