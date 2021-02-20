@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import Home from './pages/Home';
-import Pokemon from './pages/Pokemon';
+import AllPokemon from './pages/AllPokemon';
 import PokemonDetails from './pages/PokemonDetails';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <PokemonDetails />
         </Route>
         <Route path="/pokemon">
-          <Pokemon />
+          <AllPokemon />
         </Route>
         <Route path="/">
           <Home />
