@@ -5,6 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Cache from './api/Cache.js';
 
+// Before we can actually render our application, we need to generate the
+// cache it depends on, this operation takes time the first time, so we
+// do it asynchronously, first we get the instance, then, after we get the
+// result we can render our App. '_' means we don't use the result of the
+// asynchronous operation, we just needed to wait until it completed.
+// We will use the cache by importing it in different files.
 Cache.getInstance().then(_ => {
   ReactDOM.render(
       <React.StrictMode>

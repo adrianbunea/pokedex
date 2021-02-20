@@ -5,14 +5,13 @@ import {
 } from 'react-router-dom';
 import Home from './pages/Home';
 import AllPokemon from './pages/AllPokemon';
-import PokemonDetails from './pages/PokemonDetails';
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/pokemon/:id/">
-          <PokemonDetails />
+          <AllPokemon />
         </Route>
         <Route path="/pokemon">
           <AllPokemon />

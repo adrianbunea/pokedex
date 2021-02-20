@@ -16,3 +16,5 @@ function Cache() {
 }
 
 export default Cache();
+// Don't be scared, we can export a value, a value can be a function ('Cache')
+// or the result of the called function ('Cache()') 
