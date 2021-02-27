@@ -5,14 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Cache from './api/Cache.js';
 
-Cache.getInstance().then(_ => {
+Cache.init().then(
   ReactDOM.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>,
     document.getElementById('root')
-  );
-});
+  )
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

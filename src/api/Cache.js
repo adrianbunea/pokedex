@@ -1,16 +1,27 @@
 function Cache() {
-  let instance;
+  let cache;
 
-  async function createInstance() {
+  async function createCache() {
     return await caches.open('cache');
   }
 
   return {
-    getInstance: function () {
-      if (!instance) {
-        instance = createInstance();
+    init: async function () {
+      if (!cache) {
+        cache = await createCache();
       }
-      return instance;
+    },
+
+    add: function (url, response) {
+      cache.add(url, response);
+    },
+
+    put: function (url, response) {
+      cache.put(url, response);
+    },
+
+    match: function (url) {
+      return cache.match(url);
     }
   };
 }
