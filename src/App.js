@@ -11,15 +11,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/pokemon/:id/">
-          <PokemonDetails />
-        </Route>
-        <Route path="/pokemon">
-          <AllPokemon />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/pokemon/" component={AllPokemon} />
+        <Route exact path="/pokemon/:id/" component={PokemonDetails} />
       </Switch>
     </Router>
   );
